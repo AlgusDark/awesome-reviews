@@ -10,8 +10,13 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user.isLoggedIn && user.role === "admin") {
-      router.replace("/dashboard/employees");
+    if (user.isLoggedIn) {
+      if (user.role === "admin") {
+        router.replace("/dashboard/employees");
+      }
+      if (user.role === "employee") {
+        router.replace("/me");
+      }
     }
   }, [user, router]);
 
