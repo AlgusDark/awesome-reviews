@@ -9,7 +9,7 @@ const db = mysql({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     typeCast: (field, next) => {
-      if (field.name === "reviewers") {
+      if (field.name === "reviewers" || field.name === "reviewees") {
         return JSON.parse(field.string());
       }
       return next();
