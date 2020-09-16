@@ -149,15 +149,31 @@ export default function Reviews() {
                   </td>
                   <td>
                     <HStack>
-                      {review.reviewers.map((reviewer) => (
-                        <Badge
-                          key={reviewer.reviewId}
-                          variant={reviewer.active ? "outline" : "solid"}
-                          colorScheme="green"
-                        >
-                          {reviewer.firstName} {reviewer.lastName}
-                        </Badge>
-                      ))}
+                      {review.reviewers.map((reviewer) =>
+                        reviewer.active ? (
+                          <Badge
+                            key={reviewer.reviewId}
+                            variant="outline"
+                            colorScheme="green"
+                          >
+                            {reviewer.firstName} {reviewer.lastName}
+                          </Badge>
+                        ) : (
+                          <Link
+                            href="/me/[reviewId]"
+                            as={`/me/${reviewer.reviewId}`}
+                          >
+                            <Badge
+                              _hover={{ cursor: "pointer" }}
+                              key={reviewer.reviewId}
+                              variant="solid"
+                              colorScheme="green"
+                            >
+                              {reviewer.firstName} {reviewer.lastName}
+                            </Badge>
+                          </Link>
+                        )
+                      )}
                     </HStack>
                   </td>
                   <td>
