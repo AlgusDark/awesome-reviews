@@ -20,7 +20,7 @@ function UserCard({ review }) {
 
   return (
     <VStack
-      onClick={() => router.push("/me/[feedback]", `/me/${review.reviewId}`)}
+      onClick={() => router.push("/me/[reviewId]", `/me/${review.reviewId}`)}
       _hover={{
         cursor: "pointer",
         transform: "translateY(-5px) scale(1.005) translateZ(0)",
