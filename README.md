@@ -88,4 +88,7 @@ $ npm start
   - Plain passwords aren't good for production :)
 - [ ] Use Database transactions
   - We need to ensure our data is always correct
-- [ ] Create better
+- [ ] Route guards
+  - With JTW we could ensure that only proper users can access our endpoints
+- [ ] Use Types
+  - Not neccesary on the MVP because of the happy path. But it could improve DX.
