@@ -7,13 +7,32 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const results = await query(SQL`
-    SELECT r.id, r.active, u.id userId, u.firstName, u.lastName
-    FROM reviews r
-    INNER JOIN users u ON r.revieweeId = u.id
+    SELECT r.id, r.active, u.id userId, u.firstName, u.lastName,
+    CONCAT(
+        '[',
+        GROUP_CONCAT(
+          JSON_OBJECT(
+            'question',
+            q.title,
+            'id',
+            q.id,
+            'answer',
+            f.answer
+          )
+        ),
+        ']'
+      ) AS answers
+      FROM reviews r
+      INNER JOIN users u ON r.revieweeId = u.id
+      LEFT JOIN feedbacks f ON f.reviewId = r.id
+      LEFT JOIN questions q ON q.id = f.questionId
     WHERE r.id = ${reviewId}
     `);
 
-    res.status(200).json(results[0]);
+    res.status(200).json({
+      ...results[0],
+      answers: results[0].answers.filter((answer) => answer.id),
+    });
   }
 
   if (req.method === "POST") {
