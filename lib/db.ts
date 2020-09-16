@@ -25,9 +25,9 @@ export default async function excuteQuery<Response>(
   query: string | SQLStatement
 ) {
   try {
-    const results = await db.query(query);
+    const results = await db.query<Response>(query);
     await db.end();
-    return results as Response;
+    return results;
   } catch (error) {
     return { error };
   }
