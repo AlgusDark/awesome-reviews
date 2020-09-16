@@ -33,7 +33,7 @@ export default function Signup() {
   const password = useRef(null);
 
   const router = useRouter();
-  const [_user, setUser] = useUser();
+  const [, setUser] = useUser();
 
   useEffect(() => {
     if (router.asPath === "/logout") {

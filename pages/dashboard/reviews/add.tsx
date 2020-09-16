@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/core";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import type { StringOrNumber } from "@chakra-ui/utils";
 
 import { useAPI } from "utils/use-api";
 import { useEffect } from "react";
@@ -18,11 +19,11 @@ export default function Add() {
   const { get, post, response, loading } = useAPI();
   const router = useRouter();
 
-  const [reviewersValues, setReviewersValues] = useState([]);
+  const [reviewersValues, setReviewersValues] = useState<StringOrNumber[]>([]);
 
-  const [employees, setEmployees] = useState(null);
+  const [employees, setEmployees] = useState<AwesomeReviews.Employee[]>(null);
 
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>(null);
 
   useEffect(() => {
     async function loadEmployees() {
@@ -36,9 +37,9 @@ export default function Add() {
   async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (reviewersValues.length > 0 && selectedEmployee) {
+    if (reviewersValues.length > 0 && selectedEmployeeId) {
       const data = {
-        revieweeId: selectedEmployee,
+        revieweeId: selectedEmployeeId,
         reviewers: reviewersValues,
       };
 
@@ -53,7 +54,7 @@ export default function Add() {
   return (
     <>
       {!employees && <Loading />}
-      {employees.length > 0 && (
+      {employees?.length > 0 && (
         <form
           style={{
             margin: "0 auto",
@@ -66,7 +67,7 @@ export default function Add() {
               <FormLabel>Employee</FormLabel>
               <Select
                 onChange={(e) => {
-                  setSelectedEmployee(e.currentTarget.value);
+                  setSelectedEmployeeId(e.currentTarget.value);
                 }}
                 placeholder="Select Employee"
               >
@@ -87,7 +88,8 @@ export default function Add() {
                 <Flex direction="column">
                   {employees.map(
                     (employee) =>
-                      employee.id !== Number.parseInt(selectedEmployee, 10) && (
+                      employee.id !==
+                        Number.parseInt(selectedEmployeeId, 10) && (
                         <Checkbox key={employee.id} value={`${employee.id}`}>
                           {employee.firstName} {employee.lastName}
                         </Checkbox>

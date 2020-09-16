@@ -10,7 +10,7 @@ export default function Add() {
   async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    //@ts-ignore TODO: Use proper way for handling forms
+    //@ts-ignore FIXME: Use proper way for handling forms
     const { firstName, lastName, email } = e.currentTarget.elements;
 
     if ((firstName.value, lastName.value, email.value)) {
@@ -20,7 +20,7 @@ export default function Add() {
         email: email.value,
       };
 
-      const newEmployee = await post("/employees", user);
+      await post("/employees", user);
 
       if (response.ok) {
         router.push("/dashboard/employees");

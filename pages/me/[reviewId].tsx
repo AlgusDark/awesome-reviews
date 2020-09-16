@@ -34,12 +34,26 @@ function Answer({ answer }) {
   );
 }
 
+type Reviewee = {
+  answers: Array<{
+    id: number;
+    answer: string;
+    question: string;
+  }>;
+} & ArrayType<AwesomeReviews.Review["reviewers"]>;
+
+type Question = {
+  active: number;
+  id: number;
+  title: string;
+};
+
 export default function Review() {
   const router = useRouter();
   const { get, post, response, loading } = useAPI();
 
-  const [questions, setQuestions] = useState([]);
-  const [reviewee, setReviewee] = useState(null);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [reviewee, setReviewee] = useState<Reviewee>(null);
 
   useEffect(() => {
     async function getQuestions() {

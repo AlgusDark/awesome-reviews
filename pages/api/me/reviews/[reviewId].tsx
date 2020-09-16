@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const results = await query(SQL`
-    SELECT r.id, r.active, u.id userId, u.firstName, u.lastName,
+    SELECT r.id reviewId, r.active, u.id employeeId, u.firstName, u.lastName,
     CONCAT(
         '[',
         GROUP_CONCAT(

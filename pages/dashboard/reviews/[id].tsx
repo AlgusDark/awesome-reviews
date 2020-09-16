@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/core";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import type { StringOrNumber } from "@chakra-ui/utils";
 
 import { useAPI } from "utils/use-api";
 import { useEffect } from "react";
@@ -18,24 +19,26 @@ export default function EditReview() {
   const { get, put, response, loading } = useAPI();
   const router = useRouter();
 
-  const [reviewersValues, setReviewersValues] = useState([]);
+  const [reviewersValues, setReviewersValues] = useState<StringOrNumber[]>([]);
 
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState<AwesomeReviews.Employee[]>([]);
 
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState<
+    AwesomeReviews.Review
+  >(null);
 
   useEffect(() => {
     async function loadEmployees() {
       const initialEmployees = await get("/employees");
       const initialSelectedEmployee = await get(`/reviews/${router.query.id}`);
 
-      Promise.all([initialEmployees, initialSelectedEmployee]).then((data) => {
-        setEmployees(data[0]);
-        setSelectedEmployee(data[1]);
-        setReviewersValues(
-          data[1].reviewers.map((review) => `${review.employeeId}`)
-        );
-      });
+      setEmployees(initialEmployees);
+      setSelectedEmployee(initialSelectedEmployee);
+      setReviewersValues(
+        initialSelectedEmployee.reviewers.map(
+          (review) => `${review.employeeId}`
+        )
+      );
     }
 
     loadEmployees();
@@ -46,7 +49,6 @@ export default function EditReview() {
 
     if (reviewersValues.length > 0 && selectedEmployee) {
       const data = {
-        revieweeId: selectedEmployee,
         reviewers: reviewersValues,
       };
 

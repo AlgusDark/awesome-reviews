@@ -9,7 +9,7 @@ export default function Edit() {
   const { get, put, response, loading } = useAPI();
   const router = useRouter();
 
-  const [employee, setEmployee] = useState(null);
+  const [employee, setEmployee] = useState<AwesomeReviews.Employee>(null);
 
   useEffect(() => {
     const getEmployees = async () => {

@@ -20,21 +20,14 @@ import { useRouter } from "next/router";
 import { useAPI } from "utils/use-api";
 import Link from "next/link";
 
-export type Employee = {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-};
-
 export default function Employees() {
   const { get, delete: remove, response, loading } = useAPI();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState<AwesomeReviews.Employee[]>([]);
   const router = useRouter();
 
-  const selectedEmployee = useRef<Employee>(null);
+  const selectedEmployee = useRef<AwesomeReviews.Employee>(null);
 
   useEffect(() => {
     const getEmployees = async () => {
