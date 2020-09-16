@@ -1,4 +1,6 @@
-export function Loader() {
+import { Flex } from "@chakra-ui/core";
+
+function Loader() {
   return (
     <div className="lds-ring">
       <style jsx>{`
@@ -43,5 +45,13 @@ export function Loader() {
       <div></div>
       <div></div>
     </div>
+  );
+}
+
+export function Loading() {
+  return (
+    <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
+      <Loader />
+    </Flex>
   );
 }

@@ -8,7 +8,7 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/core";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -89,11 +89,7 @@ export default function Review() {
 
   return (
     <>
-      {loading && questions.length === 0 && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {loading && questions.length === 0 && <Loading />}
       {reviewee && reviewee.active === 0 && (
         <>
           <Heading>

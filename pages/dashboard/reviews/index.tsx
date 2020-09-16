@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 import {
   Flex,
   IconButton,
@@ -115,11 +115,7 @@ export default function Reviews() {
 
   return (
     <div>
-      {loading && reviews.length < 0 && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {loading && reviews.length < 0 && <Loading />}
       {reviews.length > 0 && (
         <>
           <Flex justifyContent="space-between">

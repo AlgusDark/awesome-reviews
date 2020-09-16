@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 import { useAPI } from "utils/use-api";
 import { useEffect } from "react";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 
 export default function EditReview() {
   const { get, put, response, loading } = useAPI();
@@ -61,11 +61,7 @@ export default function EditReview() {
 
   return (
     <>
-      {employees.length < 0 && selectedEmployee && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {employees.length < 0 && selectedEmployee && <Loading />}
       {employees.length > 0 && selectedEmployee && (
         <form
           style={{

@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 import { useUser } from "utils/use-user";
 import { useAPI } from "utils/use-api";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 
 function UserCard({ review }) {
   const router = useRouter();
@@ -88,11 +88,7 @@ export default function Me() {
   return (
     <Box>
       <Heading>My Reviews</Heading>
-      {loading && (
-        <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {loading && <Loading />}
       {!loading && reviews.length === 0 && <Empty />}
       {!loading && reviews.length > 0 && (
         <HStack mt={8} spacing={8}>

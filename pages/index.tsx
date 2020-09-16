@@ -1,8 +1,7 @@
-import { Flex } from "@chakra-ui/core";
 import { useEffect } from "react";
 
 import { useUser } from "utils/use-user";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -20,9 +19,5 @@ export default function Home() {
     }
   }, [user, router]);
 
-  return (
-    <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-      <Loader />
-    </Flex>
-  );
+  return <Loading />;
 }

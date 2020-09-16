@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 
 import { useAPI } from "utils/use-api";
 import { useEffect } from "react";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 
 export default function Add() {
   const { get, post, response, loading } = useAPI();
@@ -52,11 +52,7 @@ export default function Add() {
 
   return (
     <>
-      {employees.length < 0 && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {employees.length < 0 && <Loading />}
       {employees.length > 0 && (
         <form
           style={{

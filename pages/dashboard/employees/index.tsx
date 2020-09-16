@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 import {
   Flex,
   IconButton,
@@ -97,11 +97,7 @@ export default function Employees() {
 
   return (
     <div>
-      {loading && employees.length < 0 && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {loading && employees.length < 0 && <Loading />}
       {employees.length > 0 && (
         <>
           <Flex justifyContent="space-between">

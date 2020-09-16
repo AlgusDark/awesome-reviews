@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { useAPI } from "utils/use-api";
 import { useEffect, useState } from "react";
-import { Loader } from "components/loader";
+import { Loading } from "components/loading";
 
 export default function Edit() {
   const { get, put, response, loading } = useAPI();
@@ -44,11 +44,7 @@ export default function Edit() {
 
   return (
     <>
-      {!employee && (
-        <Flex alignItems="center" justifyContent="center">
-          <Loader />
-        </Flex>
-      )}
+      {!employee && <Loading />}
       {employee && (
         <form
           style={{
