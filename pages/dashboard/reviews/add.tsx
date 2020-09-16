@@ -20,7 +20,7 @@ export default function Add() {
 
   const [reviewersValues, setReviewersValues] = useState([]);
 
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState(null);
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
@@ -52,7 +52,7 @@ export default function Add() {
 
   return (
     <>
-      {employees.length < 0 && <Loading />}
+      {!employees && <Loading />}
       {employees.length > 0 && (
         <form
           style={{

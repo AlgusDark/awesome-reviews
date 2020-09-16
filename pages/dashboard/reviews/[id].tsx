@@ -2,7 +2,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Select,
   Checkbox,
   CheckboxGroup,
   Button,

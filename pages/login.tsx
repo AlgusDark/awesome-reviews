@@ -9,7 +9,6 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CloseButton,
 } from "@chakra-ui/core";
 import useFetch from "use-http";
 import { useRef, useEffect } from "react";
@@ -34,7 +33,7 @@ export default function Signup() {
   const password = useRef(null);
 
   const router = useRouter();
-  const [user, setUser] = useUser();
+  const [_user, setUser] = useUser();
 
   useEffect(() => {
     if (router.asPath === "/logout") {
